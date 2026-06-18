@@ -19,20 +19,28 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' # Uses the stable .NET 8 SDK to build the analyzer
+          dotnet-version: '8.0.x' # Uses the stable .NET 8 SDK
 
+      # Restaurar solo el proyecto del paquete NuGet y el de pruebas (evitando el VSIX de Windows)
       - name: Restore Dependencies
-        run: dotnet restore CleanArchitectureAnalyzer.sln
+        run: |
+          dotnet restore CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj
+          dotnet restore CleanArchitectureAnalyzer.Test/CleanArchitectureAnalyzer.Test.csproj
 
-      - name: Build Analyzer (Release)
-        run: dotnet build CleanArchitectureAnalyzer.sln -c Release --no-restore
+      # Compilar solo el empaquetador (esto compila automáticamente sus dependencias: el core del analizador y los CodeFixes)
+      - name: Build Package Projects (Release)
+        run: |
+          dotnet build CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj -c Release
+          dotnet build CleanArchitectureAnalyzer.Test/CleanArchitectureAnalyzer.Test.csproj -c Release
 
+      # Ejecutar las pruebas unitarias
       - name: Run Unit Tests
         run: dotnet test CleanArchitectureAnalyzer.Test/CleanArchitectureAnalyzer.Test.csproj -c Release --no-build
 
+      # Generar el paquete NuGet (.nupkg)
       - name: Pack NuGet Package
         run: dotnet pack CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj -c Release --no-build -o ./dist
 
-      # Pushea el paquete utilizando Trusted Publishing (Autenticación OIDC federada)
+      # Publicar a NuGet.org usando Trusted Publishing (OIDC)
       - name: Publish to NuGet.org
         run: dotnet nuget push ./dist/*.nupkg --source https://api.nuget.org/v3/index.json --interactive
