@@ -1,0 +1,7 @@
+root = true
+
+[*]
+
+cleanarchitecture_domain_assembly = Domain
+cleanarchitecture_application_assembly = Application
+cleanarchitecture_infrastructure_assembly = Infrastructure

@@ -1,0 +1,38 @@
+name: Publish to NuGet
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers the workflow when a version tag is pushed (e.g., v1.0.0)
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # CRITICAL: Required for requesting the OIDC JWT token from GitHub
+      contents: read  # Required to check out the source code
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x' # Uses the stable .NET 8 SDK to build the analyzer
+
+      - name: Restore Dependencies
+        run: dotnet restore CleanArchitectureAnalyzer.sln
+
+      - name: Build Analyzer (Release)
+        run: dotnet build CleanArchitectureAnalyzer.sln -c Release --no-restore
+
+      - name: Run Unit Tests
+        run: dotnet test CleanArchitectureAnalyzer.Test/CleanArchitectureAnalyzer.Test.csproj -c Release --no-build
+
+      - name: Pack NuGet Package
+        run: dotnet pack CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj -c Release --no-build -o ./dist
+
+      # Pushea el paquete utilizando Trusted Publishing (Autenticación OIDC federada)
+      - name: Publish to NuGet.org
+        run: dotnet nuget push ./dist/*.nupkg --source https://api.nuget.org/v3/index.json --interactive
