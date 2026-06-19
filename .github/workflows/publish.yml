@@ -24,22 +24,22 @@ jobs:
       # Restaurar solo el proyecto del paquete NuGet y el de pruebas (evitando el VSIX de Windows)
       - name: Restore Dependencies
         run: |
-          dotnet restore CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj
-          dotnet restore CleanArchitectureAnalyzer.Test/CleanArchitectureAnalyzer.Test.csproj
+          dotnet restore CleanArchitectureAnalyzer/CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj
+          dotnet restore CleanArchitectureAnalyzer/CleanArchitectureAnalyzer.Test/CleanArchitectureAnalyzer.Test.csproj
 
       # Compilar solo el empaquetador (esto compila automáticamente sus dependencias: el core del analizador y los CodeFixes)
       - name: Build Package Projects (Release)
         run: |
-          dotnet build CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj -c Release
-          dotnet build CleanArchitectureAnalyzer.Test/CleanArchitectureAnalyzer.Test.csproj -c Release
+          dotnet build CleanArchitectureAnalyzer/CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj -c Release
+          dotnet build CleanArchitectureAnalyzer/CleanArchitectureAnalyzer.Test/CleanArchitectureAnalyzer.Test.csproj -c Release
 
       # Ejecutar las pruebas unitarias
       - name: Run Unit Tests
-        run: dotnet test CleanArchitectureAnalyzer.Test/CleanArchitectureAnalyzer.Test.csproj -c Release --no-build
+        run: dotnet test CleanArchitectureAnalyzer/CleanArchitectureAnalyzer.Test/CleanArchitectureAnalyzer.Test.csproj -c Release --no-build
 
       # Generar el paquete NuGet (.nupkg)
       - name: Pack NuGet Package
-        run: dotnet pack CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj -c Release --no-build -o ./dist
+        run: dotnet pack CleanArchitectureAnalyzer/CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj -c Release --no-build -o ./dist
 
       # Publicar a NuGet.org usando Trusted Publishing (OIDC)
       - name: Publish to NuGet.org
