@@ -21,6 +21,12 @@ jobs:
         with:
           dotnet-version: '8.0.x' # Uses the stable .NET 8 SDK
 
+      # Intercambia el OIDC JWT de GitHub por una credencial temporal en NuGet.org
+      - name: NuGet Login
+        uses: NuGet/login@v1
+        with:
+          owner: Nico4652 # Tu usuario de GitHub
+
       # Restaurar solo el proyecto del paquete NuGet y el de pruebas (evitando el VSIX de Windows)
       - name: Restore Dependencies
         run: |
@@ -41,6 +47,6 @@ jobs:
       - name: Pack NuGet Package
         run: dotnet pack CleanArchitectureAnalyzer/CleanArchitectureAnalyzer.Package/CleanArchitectureAnalyzer.Package.csproj -c Release --no-build -o ./dist
 
-      # Publicar a NuGet.org usando Trusted Publishing (OIDC)
+      # Publicar a NuGet.org usando la credencial temporal configurada por NuGet/login
       - name: Publish to NuGet.org
         run: dotnet nuget push ./dist/*.nupkg --source https://api.nuget.org/v3/index.json --interactive
