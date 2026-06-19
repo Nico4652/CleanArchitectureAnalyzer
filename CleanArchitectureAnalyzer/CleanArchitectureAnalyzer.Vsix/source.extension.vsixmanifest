@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="CleanArchitectureAnalyzer.2ed8bcd1-3f10-4859-95bb-df6729b5c01b" Version="1.0" Language="en-US" Publisher="jayki"/>
-    <DisplayName>CleanArchitectureAnalyzer</DisplayName>
-    <Description xml:space="preserve">This is a sample diagnostic extension for the .NET Compiler Platform ("Roslyn").</Description>
+    <Identity Id="CleanArchitectureAnalyzer.2ed8bcd1-3f10-4859-95bb-df6729b5c01b" Version="1.0.0" Language="en-US" Publisher="Nico4652"/>
+    <DisplayName>Clean Architecture Analyzer</DisplayName>
+    <Description xml:space="preserve">A professional Roslyn-based static code analyzer to enforce Clean Architecture boundaries and DDD principles in C# codebases.</Description>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0,)" />

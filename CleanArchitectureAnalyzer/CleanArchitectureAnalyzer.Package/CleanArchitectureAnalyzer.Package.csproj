@@ -9,17 +9,16 @@
 
   <PropertyGroup>
     <PackageId>CleanArchitectureAnalyzer</PackageId>
-    <PackageVersion>1.0.0.0</PackageVersion>
-    <Authors>jayki</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>Nico4652</Authors>
+    <PackageProjectUrl>https://github.com/Nico4652/CleanArchitectureAnalyzer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Nico4652/CleanArchitectureAnalyzer.git</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>CleanArchitectureAnalyzer</Description>
-    <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
-    <Copyright>Copyright</Copyright>
-    <PackageTags>CleanArchitectureAnalyzer, analyzers</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>A professional Roslyn-based static code analyzer to enforce Clean Architecture boundaries and DDD principles in C# codebases.</Description>
+    <PackageReleaseNotes>Initial release with 70 rules enforcing Domain, Application, and Infrastructure boundaries.</PackageReleaseNotes>
+    <Copyright>Copyright © Nico4652 2026</Copyright>
+    <PackageTags>CleanArchitecture, Roslyn, Analyzer, Architecture, DDD, SOLID, CSharp</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
     <NoPackageAnalysis>true</NoPackageAnalysis>
 
