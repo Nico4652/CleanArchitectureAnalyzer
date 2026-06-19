@@ -25,7 +25,7 @@ jobs:
       - name: NuGet Login
         uses: NuGet/login@v1
         with:
-          user: Nico4652 # Tu usuario de GitHub (dueño del paquete)
+          user: NicoVega # Tu usuario de NuGet.org (dueño de la política de publicación)
 
       # Restaurar solo el proyecto del paquete NuGet y el de pruebas (evitando el VSIX de Windows)
       - name: Restore Dependencies

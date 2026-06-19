@@ -2,8 +2,8 @@
 
 ### New Rules
 
-Rule ID | Category	   | Severity | Notes
---------|--------------|----------|------------------------------------------------------------------------
+Rule ID | Category | Severity | Notes
+--------|----------|----------|-------
 CAA0001 | Architecture | Warning  | Domain elements depends on External Classes
 CAA0002 | Architecture | Warning  | Domain elements must not contain dependency injection in a constructor
 CAA0003 | Architecture | Warning  | Domain elements should not expose collections as List<T>
